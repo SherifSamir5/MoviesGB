@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View , SafeAreaView , TextInput , Button ,Alert , Image , TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View , SafeAreaView , TextInput , Button ,Alert , Image , TouchableOpacity , ScrollView} from 'react-native';
 import { Input, Icon } from 'react-native-elements';
 import DatePicker from '../Components/DatePicker'
 import {connect} from 'react-redux'
@@ -85,7 +85,7 @@ class AddMovies extends Component {
     render() {
         return (
             <SafeAreaView >
-
+                <ScrollView>
                 <Text style={{fontWeight : 'bold' , fontSize : 24 ,color : 'black' , opacity : 0.8 , fontStyle : 'italic' , alignSelf : 'center' , marginTop : 15}}>Add a new Movie</Text>
 
 
@@ -93,7 +93,6 @@ class AddMovies extends Component {
                 <TextInput
                     style={styles.input}
                     onChangeText={(title)=>{this.setState({title})}}
-                    placeholder="useless placeholder"
                     keyboardType='default'
                     value={this.state.title}
                 />
@@ -114,13 +113,15 @@ class AddMovies extends Component {
 
                 <DatePicker date = {this.state.date}
                  onChange = {(event,date)=>{
-                     this.state.date = date
-                    this.state.date.toUTCString().slice(4,16)
+                    // this.state.date = date
+                    // this.state.date.toUTCString().slice(4,16)
+                    this.setState({date : date})
                     }}
                  />
 
                 <Text style={styles.header}>Movie Poster : </Text>
-                <TouchableOpacity style = {{                             height : 100,
+                <TouchableOpacity style = {{               
+                        height : 100,
                         width : 200,
                         borderWidth : 2,
                         borderRadius: 10,
@@ -153,22 +154,21 @@ class AddMovies extends Component {
 
                 </TouchableOpacity>
 
-                <View style = {{marginTop : 50 , backgroundColor : 'purple' , opacity : 0.8 , alignSelf : 'center', padding : 5 , borderRadius : 10 }}>
+                <View style = {{marginTop : 50 , alignSelf : 'center', padding : 5 , borderRadius : 10 , marginBottom : 20 ,}}>
                 <Button
                     onPress={()=>{ 
                         this.postMovie()
-
-
                      } }
                     title="Post Movie"
-                    color="white"
+                    //color="purple"
+
                 />
                 </View>
 
 
 
                 
-
+                </ScrollView>
             </SafeAreaView>
         );
     }  

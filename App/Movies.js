@@ -39,6 +39,7 @@ class Movies extends Component {
   //my api key : 0922592a5f96df173c0e2fa1f7d36603
   getData = async (url = `https://api.themoviedb.org/3/discover/movie?api_key=0922592a5f96df173c0e2fa1f7d36603&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${this.state.page}&with_watch_monetization_types=flatrate`) => {
 
+    
     const response = await fetch(url,{
       method: 'GET',
       headers: {
@@ -49,13 +50,14 @@ class Movies extends Component {
   })
   .then(response => response.json())
   .then( async data => {
+    console.log('vvv2')
       //console.log(data);
       let movieArr = []
       data.results.forEach((movie)=>{
         this.state.allMovies.push(movie)
       })
       // setTimeout(() => {
-        
+      console.log('hoooo' , this.state.allMovies)
       this.setState({firstLoader : false , })
       // }, 500);
   })
@@ -82,6 +84,7 @@ class Movies extends Component {
         <SafeAreaView >
 
 
+        
         <SwitchSelector
           initial={0}
           onPress={value => this.setState({ switch: value })}
